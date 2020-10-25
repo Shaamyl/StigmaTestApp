@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StigmaTestApp</string>
+    <string name="sputget_test">SPUT SGET</string>
+    <string name="tests">TESTS</string>
 </resources>
