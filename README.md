@@ -1,5 +1,5 @@
 # StigmaTestApp
-App used with test suite to test Stigma.
+App used to test Stigma.
 - Instrument apk and run with RunStigmaTests.py on emulator/real device.
 - Add more tests by leaking appropriate tainted variables via Log.d()
 - Format for each Log.d test tag: "app name" "test type" "data leaked". Example: stigmatestapp sgetsput IMEI
