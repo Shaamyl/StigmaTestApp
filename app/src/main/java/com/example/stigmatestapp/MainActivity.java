@@ -1,3 +1,4 @@
+
 package com.example.stigmatestapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sputgetText = findViewById(R.id.sputget_test_text);
 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
+
+    }
+
+    //Run code after permissions granted
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+
         //Tests
         sgetsputIMEITest();
 
@@ -30,14 +38,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d("endstigmatestapp", "end");
     }
 
+
     private void sputIMEI(){
         Context ctx = getApplicationContext();
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
             Toast.makeText(ctx, "Phone state permissions required!", Toast.LENGTH_SHORT).show();
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
-
         }
 
         if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
