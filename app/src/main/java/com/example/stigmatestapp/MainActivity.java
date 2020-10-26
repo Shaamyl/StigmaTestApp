@@ -1,6 +1,7 @@
 package com.example.stigmatestapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Tests
         sgetsputIMEITest();
+
+        //End Tests Flag
+        Log.d("endstigmatestapp", "end");
     }
 
     private void sputIMEI(){
@@ -32,16 +36,19 @@ public class MainActivity extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
             Toast.makeText(ctx, "Phone state permissions required!", Toast.LENGTH_SHORT).show();
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
 
-        } else {
-            imei = telephonyManager.getDeviceId();
         }
+
+        if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
+            imei = telephonyManager.getDeviceId();
     }
 
     private void sgetsputIMEITest(){
         sputIMEI();
         String temp = imei;
-        Log.d("Simulating IMEI Leak", temp);
+        // unique app name to help in filtering logcat
+        Log.d("stigmatestapp sgetsput IMEI", temp);
         //Test complete
         if(!(imei.equals("unassigned")))
             sputgetText.setBackgroundColor(GREEN_TRANSPARENT);
