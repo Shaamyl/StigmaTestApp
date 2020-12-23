@@ -30,12 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ==
                 PackageManager.PERMISSION_GRANTED) {
-
             //Tests
             sgetsputIMEITest();
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            String phone_num = telephonyManager.getLine1Number();
+            //Log.d("TESTAPP", "phone number: " + phone_num);
 
-            //End Tests Flag
-            Log.d("endstigmatestapp", "end");
+            if(phone_num != null) {
+                Log.d("TESTAPP", phone_num);
+            }
 
         } else {
             // The app will remember permissions it has been granted on startup.
@@ -44,11 +47,16 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, perms, 1);
         }
 
+
     }
 
     //Simply log that permissions are granted
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
         Log.d("infostigmatestapp", "Permissions granted: " + Arrays.toString(perms));
+
+        //Tests
+        sgetsputIMEITest();
+
     }
 
 
@@ -66,5 +74,9 @@ public class MainActivity extends AppCompatActivity {
         //Test complete
         if(!(imei.equals("unassigned")))
             sputgetText.setBackgroundColor(GREEN_TRANSPARENT);
+
+
+        //End Tests Flag
+        Log.d("endstigmatestapp", "end");
     }
 }
